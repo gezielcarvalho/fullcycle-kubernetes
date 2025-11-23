@@ -1,109 +1,348 @@
-# Kubernetes
+# Full Cycle Kubernetes Learning Repository
 
-## Introduction
+A comprehensive hands-on repository for learning Kubernetes fundamentals, featuring a Go-based web application with practical examples of pods, deployments, services, and replica sets.
 
-Kubernetes is an open-source container orchestration platform designed to automate deploying, scaling, and operating application containers. It provides a framework to run distributed systems resiliently, with features like load balancing, self-healing, and automated rollouts and rollbacks.
+## 📋 Overview
 
-# Pods
-A Pod is the smallest deployable unit in Kubernetes, which can contain one or more containers. Pods share the same network namespace and can communicate with each other using localhost. They also share storage volumes, allowing them to persist data.
-Pods are typically used to run a single instance of a service or application, and they can be managed using higher-level abstractions like Deployments, ReplicaSets, and StatefulSets.
-Pods can be created and managed using YAML configuration files, which define the desired state of the Pod, including the container image, resource requests and limits, environment variables, and other settings.
-Pods can be created using the `kubectl` command-line tool or through the Kubernetes API. They can also be managed using higher-level abstractions like Deployments, ReplicaSets, and StatefulSets.
+This repository contains a complete learning path for Kubernetes, including:
 
-# Deployments
-A Deployment is a higher-level abstraction in Kubernetes that manages the lifecycle of Pods. It provides declarative updates to Pods and ReplicaSets, allowing users to define the desired state of the application and let Kubernetes handle the details of maintaining that state.
-Deployments are typically used to manage stateless applications, where the Pods can be easily replaced or scaled without losing data. They provide features like rolling updates, rollbacks, and scaling, making it easy to manage the deployment of applications in a Kubernetes cluster.
-Deployments can be created and managed using YAML configuration files, which define the desired state of the Deployment, including the container image, resource requests and limits, environment variables, and other settings.
+- A simple Go web server application
+- Kubernetes manifests for various deployment scenarios
+- Documentation covering essential Kubernetes concepts
+- Multi-node cluster configuration using Kind (Kubernetes in Docker)
 
-# ReplicaSets
-A ReplicaSet is a Kubernetes resource that ensures a specified number of Pod replicas are running at any given time. It is responsible for maintaining the desired state of the Pods, ensuring that the correct number of replicas are created and running.
-ReplicaSets are typically used in conjunction with Deployments, which manage the lifecycle of ReplicaSets and provide declarative updates to Pods. When a Deployment is created, it automatically creates a ReplicaSet to manage the Pods.
-ReplicaSets can also be used independently to manage the lifecycle of Pods, providing features like scaling and self-healing.
-ReplicaSets can be created and managed using YAML configuration files, which define the desired state of the ReplicaSet, including the number of replicas, container image, resource requests and limits, environment variables, and other settings.
+## 🚀 Quick Start
 
-# Kubernetes Architecture
-Kubernetes architecture consists of a master node and multiple worker nodes. The master node is responsible for managing the cluster, while the worker nodes run the applications. The key components of Kubernetes architecture include:
-- **Master Node**: The control plane that manages the Kubernetes cluster.
-- **API Server**: The front-end for the Kubernetes control plane, which exposes the Kubernetes API.
-- **Controller Manager**: Manages controllers that regulate the state of the cluster.
-- **Scheduler**: Assigns work to worker nodes based on resource availability and requirements.
-- **etcd**: A distributed key-value store used for storing cluster data.
-- **Kubelet**: An agent that runs on each worker node, ensuring that containers are running in a Pod.
-- **Kube Proxy**: Manages network communication between Pods and services.
-- **Pods**: The smallest deployable units in Kubernetes, which can contain one or more containers.
-- **Services**: An abstraction that defines a logical set of Pods and a policy to access them.
-- **Namespaces**: Virtual clusters within a Kubernetes cluster, used for resource isolation.
-- **Volumes**: Storage resources that can be shared among containers in a Pod.
-- **ConfigMaps**: Used to store non-confidential data in key-value pairs.
-- **Secrets**: Used to store sensitive data, such as passwords and tokens.
-- **Deployments**: A higher-level abstraction for managing Pods and ReplicaSets.
-- **ReplicaSets**: Ensures that a specified number of Pod replicas are running at any given time.
-- **StatefulSets**: Manages the deployment and scaling of a set of Pods, providing guarantees about the ordering and uniqueness of these Pods.
-- **DaemonSets**: Ensures that all (or some) nodes run a copy of a Pod.
-- **Jobs**: A controller that creates one or more Pods and ensures that a specified number of them successfully terminate.
-- **CronJobs**: A controller that creates Jobs on a scheduled basis.
-- **Ingress**: Manages external access to services, typically HTTP.
-- **Network Policies**: Defines rules for how Pods communicate with each other and with other network endpoints.
-- **Resource Quotas**: Limits the amount of resources that can be consumed by a namespace.
-- **Limit Ranges**: Sets constraints on the resources that can be requested or limited for containers in a namespace.
-- **Horizontal Pod Autoscaler**: Automatically scales the number of Pods in a deployment based on observed CPU utilization or other select metrics.
-- **Vertical Pod Autoscaler**: Automatically adjusts the resource requests and limits for containers in a Pod based on usage.
-- **Cluster Autoscaler**: Automatically adjusts the size of a Kubernetes cluster based on the resource requirements of the Pods.
-- **Custom Resource Definitions (CRDs)**: Extends Kubernetes capabilities by allowing users to define their own resource types.
-- **Operators**: A method of packaging, deploying, and managing a Kubernetes application.
-- **Helm**: A package manager for Kubernetes that simplifies the deployment and management of applications.
-- **Kustomize**: A tool for customizing Kubernetes YAML configurations.
-- **kubectl**: The command-line tool for interacting with the Kubernetes API server.
-- **Kubeadm**: A tool for bootstrapping Kubernetes clusters.
-- **Kube-scheduler**: A component of the Kubernetes control plane that assigns Pods to nodes based on resource availability and constraints.
-- **Kube-controller-manager**: A component of the Kubernetes control plane that runs controller processes.
-- **Kubelet**: An agent that runs on each node in the cluster, ensuring that containers are running in Pods.
-- **Kube-proxy**: A network proxy that runs on each node in the cluster, managing network communication between Pods and services.
-- **CNI (Container Network Interface)**: A specification for configuring network interfaces in Linux containers.
-- **CSI (Container Storage Interface)**: A specification for exposing arbitrary block and file storage systems to containerized workloads on Kubernetes.
-- **RBAC (Role-Based Access Control)**: A method for regulating access to resources in Kubernetes based on the roles of individual users or groups.
-- **Network Policies**: A specification for controlling the communication between Pods and other network endpoints.
-- **Pod Security Policies**: A specification for controlling the security context of Pods.
-- **Admission Controllers**: A piece of code that intercepts requests to the Kubernetes API server before persistence of the object, but after the request is authenticated and authorized.
-- **Service Accounts**: A special type of account used by Pods to interact with the Kubernetes API.
-- **Node Affinity**: A set of rules used by the scheduler to determine which nodes a Pod can be scheduled on based on node labels.
-- **Taints and Tolerations**: A mechanism for controlling which Pods can be scheduled on which nodes.
-- **Pod Disruption Budgets**: A policy that limits the number of disruptions that can occur to a set of Pods.
-- **Resource Requests and Limits**: A way to specify the minimum and maximum amount of resources that a container can use.
-- **Affinity and Anti-Affinity**: A set of rules that influence the scheduling of Pods based on labels and other criteria.
-- **Service Mesh**: A dedicated infrastructure layer that manages service-to-service communication, providing features like traffic management, security, and observability.
-- **Istio**: An open-source service mesh that provides a way to control how microservices share data with one another.
-- **Linkerd**: A lightweight service mesh designed for simplicity and performance.
-- **Kube-state-metrics**: A service that listens to the Kubernetes API and generates metrics about the state of the objects.
-- **Prometheus**: An open-source monitoring and alerting toolkit designed for reliability and scalability.
-- **Grafana**: An open-source platform for monitoring and observability, often used with Prometheus for visualizing metrics.
-- **Fluentd**: An open-source data collector for unified logging, often used for aggregating logs from multiple sources.
-- **ELK Stack (Elasticsearch, Logstash, Kibana)**: A set of tools for searching, analyzing, and visualizing log data in real time.
-- **OpenShift**: A Kubernetes-based platform for developing, deploying, and managing applications.
-- **Rancher**: An open-source platform for managing Kubernetes clusters, providing a user-friendly interface and additional features.
-- **K3s**: A lightweight Kubernetes distribution designed for resource-constrained environments.
-- **Minikube**: A tool that creates a local Kubernetes cluster for development and testing purposes.
-- **Kind (Kubernetes IN Docker)**: A tool for running local Kubernetes clusters using Docker container "nodes".
-- **KubeVirt**: An extension for Kubernetes that allows users to run and manage virtual machines alongside container workloads.
-- **Knative**: A Kubernetes-based platform for building, deploying, and managing serverless applications.
-- **KEDA (Kubernetes Event-Driven Autoscaling)**: An open-source project that provides event-driven autoscaling for Kubernetes workloads.
-- **Kubeflow**: An open-source platform for machine learning on Kubernetes, providing tools for building, training, and deploying ML models.
-- **Argo CD**: A declarative, GitOps continuous delivery tool for Kubernetes.
-- **Flux**: A set of continuous and progressive delivery solutions for Kubernetes, focusing on GitOps principles.
-- **Tekton**: An open-source framework for creating CI/CD systems on Kubernetes.
-- **Kustomize**: A tool for customizing Kubernetes YAML configurations, allowing users to create reusable and maintainable configurations.
-- **Kubeless**: A serverless framework for Kubernetes, allowing users to deploy functions as a service.
-- **OpenFaaS**: An open-source framework for building serverless functions on Kubernetes, providing a simple way to deploy and manage functions.
-- **KubeEdge**: An open-source system for extending native containerized application orchestration capabilities to hosts at the edge.
-- **K3OS**: A lightweight operating system designed for running Kubernetes clusters, optimized for resource-constrained environments.
-- **KubeArmor**: An open-source runtime security enforcement engine for containers and Kubernetes, providing security policies and monitoring.
-- **Falco**: An open-source runtime security tool for detecting anomalous activity in applications running on containers.
-- **Sysdig**: A cloud-native visibility and security platform for monitoring and securing Kubernetes environments.
-- **Aqua Security**: A security platform for protecting containerized applications, providing vulnerability scanning, runtime protection, and compliance.
-- **Twistlock**: A cloud-native security platform for protecting containerized applications, providing vulnerability management, compliance, and runtime protection.
-- **StackRox**: A Kubernetes-native security platform that provides visibility and control over the security posture of Kubernetes environments.
-- **Calico**: A networking and network security solution for containers, providing high-performance networking and policy enforcement.
-- **Flannel**: A simple and easy way to configure a layer 3 network fabric designed for Kubernetes.
-- **Weave Net**: A networking solution for Kubernetes that provides a simple way to connect and manage containers.
-- **Cilium**: A networking and security solution for containers and microservices, providing visibility and control over network traffic.
+### Prerequisites
 
+- Docker installed
+- Kind (Kubernetes in Docker) installed
+- kubectl CLI tool installed
+- Go 1.23.3+ (for local development)
+
+### Running the Application
+
+1. **Build the Docker image:**
+
+```bash
+cd app
+docker build -t gezielcarvalho/hello-go:latest .
+```
+
+2. **Create a Kind cluster:**
+
+```bash
+kind create cluster --config=k8s/kind-config.yaml --name fullcycle
+```
+
+3. **Deploy Portainer UI (recommended first):**
+
+```bash
+kubectl apply -f k8s/portainer.yaml
+
+# Wait for Portainer to be ready
+kubectl wait --for=condition=ready pod -l app=portainer -n portainer --timeout=90s
+
+# Access Portainer
+kubectl port-forward -n portainer svc/portainer 9000:9000
+# Open http://localhost:9000 in your browser
+```
+
+4. **Deploy the Go application:**
+
+5. **Deploy the Go application:**
+
+```bash
+# Using Deployment (recommended)
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+
+# Or using Pod directly
+kubectl apply -f k8s/pod-config.yaml
+
+# Or using ReplicaSet
+kubectl apply -f k8s/replicaset.yaml
+```
+
+5. **Access the application:**
+
+```bash
+kubectl port-forward service/goserver-service 8080:8080
+# Visit http://localhost:8080
+```
+
+> 💡 **Tip**: Use Portainer (http://localhost:9000) to visually monitor your deployments, pods, and services!
+
+## 📁 Project Structure
+
+```
+.
+├── app/                    # Go application source code
+│   ├── Dockerfile          # Container image definition
+│   ├── server.go           # Simple HTTP server
+│   └── go.mod              # Go module definition
+├── k8s/                    # Kubernetes manifests
+│   ├── deployment.yaml     # Deployment configuration (6 replicas)
+│   ├── service.yaml        # ClusterIP service
+│   ├── replicaset.yaml     # ReplicaSet configuration
+│   ├── pod-config.yaml     # Single pod configuration
+│   ├── kind-config.yaml    # Multi-node cluster setup
+│   ├── portainer.yaml      # Portainer UI for cluster management
+│   └── kubernetes-dashboard.yaml  # Kubernetes Dashboard setup
+└── docs/                   # Learning documentation
+    ├── 01-kind.md
+    ├── 02-kubectl.md
+    ├── 03-creating-cluster.md
+    ├── 04-creating-multi-node-clusters.md
+    ├── 05-pods.md
+    ├── 06-replicaset.md
+    ├── 07-upgrading-apps.md
+    ├── 08-deployment.md
+    ├── 09-reverting-deployment.md
+    └── 10-services.md
+```
+
+## 🎯 Application Details
+
+The Go application (`app/server.go`) is a simple HTTP server that:
+
+- Listens on port 8000
+- Returns a greeting message with the hostname
+- Useful for demonstrating load balancing across multiple pods
+
+**Current Configuration:**
+
+- Image: `gezielcarvalho/hello-go:v11`
+- Deployment: 6 replicas
+- Service: ClusterIP on port 8080
+- Resource Limits: 128Mi memory, 500m CPU
+- Resource Requests: 64Mi memory, 250m CPU
+
+## 📚 Learning Path
+
+Follow the documentation in order to understand Kubernetes concepts progressively:
+
+1. **Kind** - Setting up local Kubernetes clusters
+2. **kubectl** - Command-line tool basics
+3. **Creating Clusters** - Basic cluster creation
+4. **Multi-Node Clusters** - Advanced cluster configurations
+5. **Pods** - Understanding the smallest deployable units
+6. **ReplicaSets** - Managing pod replicas
+7. **Upgrading Apps** - Rolling updates and versioning
+8. **Deployments** - Declarative application management
+9. **Reverting Deployments** - Rollback strategies
+10. **Services** - Exposing applications
+
+## 🔧 Kubernetes Resources Included
+
+### Pod Configuration
+
+- Single container pod
+- Resource requests and limits
+- Labels for organization
+
+### ReplicaSet
+
+- 2 replicas configuration
+- Selector-based pod management
+- Version tracking with annotations
+
+### Deployment
+
+- 6 replicas for high availability
+- Rolling update strategy
+- Change cause tracking
+- Version management (currently v11)
+
+### Service
+
+- Type: ClusterIP
+- Port mapping: 8080 → 8000
+- Selector-based pod discovery
+
+### Kind Cluster
+
+- 1 control-plane node
+- 3 worker nodes
+- Multi-node setup for realistic scenarios
+
+### Portainer UI
+
+- Web-based Kubernetes management interface
+- NodePort service on port 30777
+- Persistent volume for data storage
+- Full cluster admin access for learning purposes
+
+### Kubernetes Dashboard (Optional)
+
+- Official Kubernetes web UI
+- Can be installed for native cluster visualization
+- Alternative to Portainer for cluster management
+
+## 🛠️ Common Commands
+
+```bash
+# Check deployment status
+kubectl get deployments
+kubectl get pods
+kubectl get services
+
+# Scale deployment
+kubectl scale deployment goserver --replicas=10
+
+# Update deployment image
+kubectl set image deployment/goserver goserver=gezielcarvalho/hello-go:v12
+
+# View deployment history
+kubectl rollout history deployment/goserver
+
+# Rollback deployment
+kubectl rollout undo deployment/goserver
+
+# View pod logs
+kubectl logs -l app=goserver
+
+# Delete resources
+kubectl delete -f k8s/deployment.yaml
+kubectl delete -f k8s/service.yaml
+
+# Portainer UI commands
+kubectl get all -n portainer
+kubectl port-forward -n portainer svc/portainer 9000:9000
+# Access at http://localhost:9000
+
+# Check Portainer pod status
+kubectl get pods -n portainer
+kubectl logs -n portainer -l app=portainer
+```
+
+## 🌟 Key Features Demonstrated
+
+- **High Availability**: Multiple replicas across worker nodes
+- **Resource Management**: CPU and memory limits/requests
+- **Rolling Updates**: Zero-downtime deployments
+- **Service Discovery**: ClusterIP service for internal communication
+- **Load Balancing**: Traffic distribution across pods
+- **Self-Healing**: Automatic pod replacement on failure
+- **Web UI Management**: Portainer for visual cluster management and monitoring
+
+## 📖 Kubernetes Concepts
+
+### Pods
+
+A Pod is the smallest deployable unit in Kubernetes, which can contain one or more containers. Pods share the same network namespace and can communicate with each other using localhost.
+
+### Deployments
+
+A Deployment manages the lifecycle of Pods and provides declarative updates. It enables rolling updates, rollbacks, and scaling for stateless applications.
+
+### ReplicaSets
+
+A ReplicaSet ensures a specified number of Pod replicas are running at any given time. Deployments automatically create and manage ReplicaSets.
+
+### Services
+
+Services provide a stable network endpoint to access a logical set of Pods, enabling service discovery and load balancing.
+
+## 🖥️ Cluster Management UI
+
+This repository includes two options for managing your Kubernetes cluster through a web interface:
+
+### Portainer (Recommended for Beginners) ✅
+
+Portainer provides a user-friendly web interface for managing your Kubernetes cluster. It's perfect for visualizing your infrastructure and learning Kubernetes concepts.
+
+**Installation:**
+
+```bash
+kubectl apply -f k8s/portainer.yaml
+```
+
+**Access (Port-Forward Method - Recommended for Kind):**
+
+```bash
+kubectl port-forward -n portainer svc/portainer 9000:9000
+```
+
+Then open: **http://localhost:9000**
+
+**Features:**
+
+- Visual representation of all cluster resources (pods, deployments, services, etc.)
+- Real-time monitoring and logs
+- Easy deployment management
+- Resource usage dashboards
+- Persistent data storage (1Gi volume)
+
+**First-time Setup:**
+
+1. Open **http://localhost:9000** (ensure port-forward is running)
+2. Create an admin password (minimum 12 characters)
+3. Click "Get Started" to connect to the local Kubernetes environment
+4. Explore your cluster resources visually!
+
+**What You Can Do with Portainer:**
+
+- 📊 View all deployments, pods, services, and replica sets in a visual dashboard
+- 🔍 Inspect individual pods and view their logs in real-time
+- 📈 Monitor resource usage (CPU, memory) across your cluster
+- 🎛️ Scale deployments up or down with a simple slider
+- 🚀 Deploy new applications using forms or YAML
+- 🔄 Manage pod lifecycles (restart, delete, etc.)
+- 📦 View and manage persistent volumes and claims
+- 🌐 Explore service endpoints and networking
+
+> 💡 **Pro Tip**: Keep Portainer open in a browser tab while following the tutorials. It provides instant visual feedback for all kubectl commands you run!
+
+### Kubernetes Dashboard (Official Alternative)
+
+For a more native Kubernetes experience, you can also install the official Kubernetes Dashboard:
+
+```bash
+# Install official dashboard
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+# Apply admin user configuration
+kubectl apply -f k8s/kubernetes-dashboard.yaml
+
+# Get access token
+kubectl -n kubernetes-dashboard create token admin-user
+
+# Start proxy
+kubectl proxy
+
+# Access at: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+```
+
+**Comparison:**
+
+| Feature           | Portainer              | Kubernetes Dashboard  |
+| ----------------- | ---------------------- | --------------------- |
+| Ease of Use       | ⭐⭐⭐⭐⭐             | ⭐⭐⭐                |
+| Setup Complexity  | Simple                 | Token-based auth      |
+| Access Method     | Port-forward           | Proxy required        |
+| Visual Appeal     | Modern, intuitive UI   | Functional, minimal   |
+| Best For          | Learning, quick access | Native K8s experience |
+| Container Support | Docker + K8s           | Kubernetes only       |
+
+## 💡 Tips for Using Kind with WSL
+
+When using Kind (Kubernetes in Docker) with WSL, keep these tips in mind:
+
+1. **Port Forwarding**: Use `kubectl port-forward` to access services instead of NodePort
+2. **Cluster Naming**: Always specify `--name fullcycle` when creating clusters for consistency
+3. **Cleanup**: Delete clusters when done with `kind delete cluster --name fullcycle`
+4. **Multiple Terminals**: Run port-forward commands in separate terminal windows/tabs
+5. **Docker Desktop**: Ensure Docker Desktop is running with WSL2 integration enabled
+
+## 🤝 Contributing
+
+This is a learning repository. Feel free to fork and experiment with different configurations!
+
+## 📝 License
+
+This project is for educational purposes.
+
+---
+
+**Note**: This repository is part of the Full Cycle course material focused on Kubernetes fundamentals.
